@@ -1,6 +1,6 @@
 import UIKit
 
-//Sets are like arrays that don't have order - fast lookup
+//Sets are like arrays that don't have order - fast lookup - it will not contain duplicates
 var names = Set(["Jon", "Jane", "Dan", "Adam", "Diane"])
 
 //Inserting item into set
