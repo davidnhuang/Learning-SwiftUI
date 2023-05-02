@@ -21,3 +21,23 @@ func getUserInfo() -> (id: String, password: String) {
 
 let (userID, userPassword) = getUserInfo() // if you want to pull id or password out
 print(userPassword) // this will print out password parameter
+
+let sentence = "I see a red door and I want it painted black."
+print(sentence.hasPrefix("I see"))
+
+// Adding "_ " before makes it so that you don't have to label the parameters
+func isUppercase(_ string: String) -> Bool {
+    string == string.uppercased()
+}
+
+let string = "HELLO WORLD"
+let checkUppercase = isUppercase(string) // here, instead of string: string, you can just pass in string
+
+// for is the external paramter name, and number is the internal param name - internalParam externalParam
+func printTimesTable(for number: Int) {
+    for i in 1...12 {
+        print("\(i) x \(number) is \(i*number)")
+    }
+}
+
+printTimesTable(for: 5)

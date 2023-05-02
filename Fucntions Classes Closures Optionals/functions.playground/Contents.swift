@@ -61,3 +61,13 @@ func rightOrWrong(judgement: Bool) {
 }
 
 rightOrWrong(judgement: false) // this should return nothing - this function sucks but it's to illustrate a point
+
+// Set default value for end: to 12
+func printTimesTable(for number: Int, end: Int = 12) {
+    for i in 1...end {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTable(for: 5) // ends in 12, default
+printTimesTable(for: 5, end: 13) // ends in 13
