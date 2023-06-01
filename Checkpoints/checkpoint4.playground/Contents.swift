@@ -13,8 +13,6 @@ enum sqrtError: Error {
 
 func findSquareRoot(of number: Int) throws {
     
-    var result = 0
-    
     if number < 1 || number > 10_000 {
         throw sqrtError.outOfBound
     }
