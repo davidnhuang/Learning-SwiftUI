@@ -27,6 +27,20 @@ struct ContentView: View {
         
     }
     
+    // You can create custom views, like components, that share the same modifiers
+    struct LargePillText: View {
+        var text: String
+        
+        var body: some View {
+            Text(text)
+                .font(.subheadline)
+                .padding()
+                .foregroundStyle(.white)
+                .background(.indigo)
+                .clipShape(.capsule)
+        }
+    }
+    
     // Some view is opaque type
     // We don't need to know what type of View, SwiftUI figures it out
     // the acutual View type can be found with print(type(of: ...))
@@ -41,7 +55,8 @@ struct ContentView: View {
             Text("Hello, world!")
             VStack {
                 ForEach(0..<sampleText.count) {
-                    Text(sampleText[$0])
+                    // Using LargePillText custom view
+                    LargePillText(text: sampleText[$0])
                 }
                 phraseFirst
                     .font(.body)
