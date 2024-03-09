@@ -13,6 +13,13 @@ struct ContentView: View {
     @State private var checkAmount = 0.0
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 18
+    @State private var didLeaveTip = { (tip: Int) -> Bool in
+        if tip > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
     @FocusState private var amountIsFocused: Bool
     
     let tipPercentages = [15, 18, 20, 25, 0]
@@ -59,6 +66,7 @@ struct ContentView: View {
                 Section("Split among \(numberOfPeople+2) people") {
                     // Text view that reads and updates when there are updates to checkAmount
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                        .foregroundStyle(didLeaveTip(tipPercentage) ? .black : .orange)
                 }
             }
             .navigationTitle("We Split")
@@ -71,6 +79,7 @@ struct ContentView: View {
             }
         }
     }
+    
 }
 
 #Preview {

@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+// You can create custom modifiers!
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundStyle(.white)
+            .padding()
+            .background(.gray.gradient)
+            .clipShape(.rect(cornerRadius: 12))
+    }
+}
+
 // Why does SwiftUI use structs instead of class?
 // 1. Structs are more performant
 // 2. Structs are isolated. States are isolated to the view you are working on
@@ -32,14 +44,12 @@ struct ContentView: View {
         var text: String
         
         var body: some View {
+            // Custom modifier being used here
             Text(text)
-                .font(.subheadline)
-                .padding()
-                .foregroundStyle(.white)
-                .background(.indigo)
-                .clipShape(.capsule)
         }
     }
+    
+    
     
     // Some view is opaque type
     // We don't need to know what type of View, SwiftUI figures it out
@@ -53,6 +63,7 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
             Text("Hello, world!")
+                .titleStyle()
             VStack {
                 ForEach(0..<sampleText.count) {
                     // Using LargePillText custom view
@@ -66,8 +77,10 @@ struct ContentView: View {
             // Environment modifier applies to all the elements inside
             // Child modifiers will override the environment modifier
             .font(.title)
-            
             nestedView
+            Color.yellow
+                .frame(height: 100)
+                .watermarked(with: "Made in Swift!")
         }
         // Modifier order matters!
         // Best way to remember is that swift renders things one at a time
@@ -79,6 +92,33 @@ struct ContentView: View {
         // forgroundColor will be red is useRedText is true, white if false
         // this is more efficient and performant
         .foregroundColor(useYellowText ? .yellow : .white)
+    }
+}
+
+struct Watermark: ViewModifier {
+    var text: String
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .bottomTrailing) {
+            content
+            Text(text)
+                .font(.caption)
+                .foregroundStyle(.white)
+                .padding(5)
+                .background(.black)
+        }
+    }
+}
+
+// When you create custom modifers, it's a good idea to add it to the view extension
+// this makes declaring it later easier
+extension View {
+    func titleStyle() -> some View {
+        modifier(Title())
+    }
+    
+    func watermarked(with text: String) -> some View {
+        modifier(Watermark(text: text))
     }
 }
 

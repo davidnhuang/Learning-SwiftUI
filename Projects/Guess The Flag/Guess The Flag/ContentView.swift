@@ -45,11 +45,8 @@ struct ContentView: View {
                     // Tap Flag
                     flagTapped(number)
                 } label: {
-                    Image(countries[number])
+                    FlagView(country: countries[number])
                 }
-                .cornerRadius(12)
-                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, y: 8)
-                
             }
         }
         .frame(maxWidth: .infinity)
@@ -85,6 +82,16 @@ struct ContentView: View {
     }
     
 }
+
+struct FlagView: View {
+    var country: String
+    var body: some View {
+        Image(country)
+            .cornerRadius(12)
+            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, y: 8)
+    }
+}
+
 
 #Preview {
     ContentView().preferredColorScheme(.dark)
