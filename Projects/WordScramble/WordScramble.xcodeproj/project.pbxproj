@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A515A4352B9FE628006C782A /* IntroToLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = A515A4342B9FE628006C782A /* IntroToLists.swift */; };
+		A54841452BA509C1008BB83A /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = A54841442BA509C1008BB83A /* start.txt */; };
 		A5D78E332B9CE1B6005018B7 /* WordScrambleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D78E322B9CE1B6005018B7 /* WordScrambleApp.swift */; };
 		A5D78E352B9CE1B6005018B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D78E342B9CE1B6005018B7 /* ContentView.swift */; };
 		A5D78E372B9CE1B8005018B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5D78E362B9CE1B8005018B7 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A515A4342B9FE628006C782A /* IntroToLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroToLists.swift; sourceTree = "<group>"; };
+		A54841442BA509C1008BB83A /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = start.txt; path = ../../../_Resources/SwiftUI/project5/WordScramble/start.txt; sourceTree = "<group>"; };
 		A5D78E2F2B9CE1B6005018B7 /* WordScramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordScramble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D78E322B9CE1B6005018B7 /* WordScrambleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordScrambleApp.swift; sourceTree = "<group>"; };
 		A5D78E342B9CE1B6005018B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 			children = (
 				A5D78E322B9CE1B6005018B7 /* WordScrambleApp.swift */,
 				A5D78E342B9CE1B6005018B7 /* ContentView.swift */,
+				A515A4342B9FE628006C782A /* IntroToLists.swift */,
+				A54841442BA509C1008BB83A /* start.txt */,
 				A5D78E362B9CE1B8005018B7 /* Assets.xcassets */,
 				A5D78E382B9CE1B8005018B7 /* Preview Content */,
 			);
@@ -126,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D78E3A2B9CE1B8005018B7 /* Preview Assets.xcassets in Resources */,
+				A54841452BA509C1008BB83A /* start.txt in Resources */,
 				A5D78E372B9CE1B8005018B7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +146,7 @@
 			files = (
 				A5D78E352B9CE1B6005018B7 /* ContentView.swift in Sources */,
 				A5D78E332B9CE1B6005018B7 /* WordScrambleApp.swift in Sources */,
+				A515A4352B9FE628006C782A /* IntroToLists.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
