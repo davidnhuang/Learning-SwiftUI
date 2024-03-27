@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var scoreTitle = ""
     @State private var score = 0
     @State private var scoreMessage = ""
+    @State private var animationAmount = 0.0
     
     var body: some View {
         //Main
@@ -47,6 +48,9 @@ struct ContentView: View {
                 } label: {
                     FlagView(country: countries[number])
                 }
+                .rotation3DEffect(
+                    .degrees(animationAmount), axis: (x: 0, y: 1.0, z: 0.0)
+                )
             }
         }
         .frame(maxWidth: .infinity)
@@ -63,6 +67,10 @@ struct ContentView: View {
     
     // Functions
     func flagTapped(_ number: Int) {
+        withAnimation(.spring(duration: 1, bounce: 0.25)) {
+            animationAmount += 360
+        }
+        
         if number == correctAnswer {
             scoreTitle = "Correct ✅"
             score += 1
