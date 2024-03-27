@@ -10,14 +10,19 @@ import SwiftUI
 struct ContentView: View {
     // Randomized list of countries
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
+    
     @State private var correctAnswer = Int.random(in: 0...2)
+    
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var score = 0
     @State private var scoreMessage = ""
+    
+    @State private var didTap = false
     @State private var animationAmount = 0.0
     
     var body: some View {
+        
         //Main
         VStack(spacing: 30) {
             //Title
@@ -43,13 +48,22 @@ struct ContentView: View {
             // Loops through first 3 countries and displays the flag image view inside the button
             ForEach(0..<3) { number in
                 Button {
+                    
+                    withAnimation(.spring(duration: 1, bounce: 0.25)) {
+                        animationAmount += 360
+                    }
+                    
                     // Tap Flag
                     flagTapped(number)
+                    
                 } label: {
                     FlagView(country: countries[number])
                 }
                 .rotation3DEffect(
-                    .degrees(animationAmount), axis: (x: 0, y: 1.0, z: 0.0)
+                    .degrees(
+                        number == correctAnswer ? animationAmount : 0
+                    ),
+                    axis: (x: 0, y: 1.0, z: 0.0)
                 )
             }
         }
@@ -67,10 +81,6 @@ struct ContentView: View {
     
     // Functions
     func flagTapped(_ number: Int) {
-        withAnimation(.spring(duration: 1, bounce: 0.25)) {
-            animationAmount += 360
-        }
-        
         if number == correctAnswer {
             scoreTitle = "Correct ✅"
             score += 1
