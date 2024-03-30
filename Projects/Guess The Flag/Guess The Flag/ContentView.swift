@@ -18,8 +18,12 @@ struct ContentView: View {
     @State private var score = 0
     @State private var scoreMessage = ""
     
-    @State private var didTap = false
+    // Animation Properties
+    @State private var selectedFlag = 0
     @State private var animationAmount = 0.0
+    @State private var animateOpacity = 1.0
+    @State private var animateIncorrectAnswers = false
+    @State private var animateOtherAnswers = false
     
     var body: some View {
         
@@ -48,22 +52,36 @@ struct ContentView: View {
             // Loops through first 3 countries and displays the flag image view inside the button
             ForEach(0..<3) { number in
                 Button {
-                    
-                    withAnimation(.spring(duration: 1, bounce: 0.25)) {
-                        animationAmount += 360
-                    }
-                    
+                    // Identify selected button in ForEach
+                    self.selectedFlag = number
                     // Tap Flag
-                    flagTapped(number)
+                    self.flagTapped(number)
                     
                 } label: {
                     FlagView(country: countries[number])
                 }
+                // animate correct answer
                 .rotation3DEffect(
-                    .degrees(
-                        number == correctAnswer ? animationAmount : 0
-                    ),
-                    axis: (x: 0, y: 1.0, z: 0.0)
+                    .degrees(number == self.correctAnswer ? self.animationAmount : 0),
+                    axis: (x: 0, y: 1, z: 0)
+                )
+                // scale down
+                .scaleEffect(
+                    CGSize(
+                        width: number != self.correctAnswer && animateIncorrectAnswers ? 0.85 : 1,
+                        height: number != self.correctAnswer && animateIncorrectAnswers ? 0.85 : 1
+                    )
+                )
+                // animate incorrect answer
+                // scale down
+                .scaleEffect(
+                    CGSize(
+                        width: number != self.correctAnswer && animateOtherAnswers ? 0.85 : 1,
+                        height: number != self.correctAnswer && animateOtherAnswers ? 0.85 : 1
+                    )
+                )
+                .opacity(
+                    number != self.correctAnswer && animateOtherAnswers ? 0.5 : 1
                 )
             }
         }
@@ -85,10 +103,24 @@ struct ContentView: View {
             scoreTitle = "Correct ✅"
             score += 1
             scoreMessage = "Your current streak is \(score)"
+            
+            // Create animation for correct answer
+            withAnimation {
+                self.animationAmount += 360
+                self.animateOpacity = 0.25
+                self.animateIncorrectAnswers = true // only animates after tap
+            }
+            
         } else {
             scoreTitle = "Wrong ❌"
             scoreMessage = "That is the flag for \(countries[number]). Your streak was \(score)"
             score = 0
+            
+            // Create animation for incorrect answer
+            withAnimation {
+                self.animationAmount = 0.25
+                self.animateOtherAnswers = true // only animates after tap
+            }
         }
         
         showingScore = true
@@ -97,6 +129,12 @@ struct ContentView: View {
     func resetRound() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        //Reset animation states
+        selectedFlag = 0
+        animationAmount = 0.0
+        animateOpacity = 1.0
+        animateIncorrectAnswers = false
+        animateOtherAnswers = false
     }
     
 }
