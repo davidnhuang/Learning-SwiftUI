@@ -13,14 +13,17 @@ struct CategoryPicker: View {
     let categories = ["Dining", "Beverages", "Entertainment", "Medical", "Emergency", "Other"]
     
     @State private var date = Date.now
+    var inputAmount: String
     
     var body: some View {
-        Button("Category") {
+        Text(inputAmount)
+        
+        Button("Save") {
             dismiss()
         }
     }
 }
 
 #Preview {
-    CategoryPicker()
+    CategoryPicker(inputAmount: "2.0")
 }
