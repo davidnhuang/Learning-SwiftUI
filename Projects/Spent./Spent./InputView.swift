@@ -17,12 +17,11 @@ struct InputView: View {
     var body: some View {
         VStack {
             TextField("Amount", value: $amount, format: .currency(code: "USD"))
-            Button("Spent") {
+            Button(amount == 0.0 ? "Spent" : "Spent \(amount) on ...") {
                 if amount == 0.0 {
                     presentSummaryView = true
                 } else {
                     presentPickerView = true
-                    amount = 0.0
                 }
             }
         }

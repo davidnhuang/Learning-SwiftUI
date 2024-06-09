@@ -16,6 +16,8 @@ struct CategoryPicker: View {
     var inputAmount: String
     
     var body: some View {
+        Text("Category Picker view")
+        
         Text(inputAmount)
         
         Button("Save") {
