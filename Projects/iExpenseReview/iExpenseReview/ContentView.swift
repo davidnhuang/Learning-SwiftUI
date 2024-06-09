@@ -8,8 +8,10 @@
 import SwiftUI
 
 // Create the structure of the data for our expense item
-struct ExpenseItem: Identifiable {
-    let id = UUID() // generate new uuid everytime it's created
+// Identifiable makes each ExpenseItem unique with ID property
+// Codable makes it possible to be saved
+struct ExpenseItem: Identifiable, Codable {
+    var id = UUID() // generate new uuid everytime it's created
     // Properties
     let name: String
     let type: String
@@ -19,7 +21,31 @@ struct ExpenseItem: Identifiable {
 // Allows multiple different views to access Expenses
 @Observable
 class Expenses {
-    var items = [ExpenseItem]()
+    var items = [ExpenseItem]() {
+        // Here, we will make it so data can be stored to the disk using JSON encoder
+        // This is the writing part
+        didSet {
+            // Try creating an encoder and encode var items
+            if let encoded = try? JSONEncoder().encode(items) {
+                UserDefaults.standard.set(encoded, forKey: "Items")
+            }
+        }
+    }
+    
+    // Create a custom initializer to allow reading the data
+    init() {
+        // Here, we will make it so data can be read
+        if let savedItem = UserDefaults.standard.data(forKey: "Items") {
+            // try decoding it into an array decodedItMES
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItem) {
+                items = decodedItems
+                return
+            }
+        }
+        
+        // If all fails, array is empty
+        items = []
+    }
 }
 
 struct ContentView: View {

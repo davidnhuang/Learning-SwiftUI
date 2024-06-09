@@ -12,28 +12,12 @@ struct CategoryPicker: View {
     
     let categories = ["Dining", "Beverages", "Entertainment", "Medical", "Emergency", "Other"]
     
+    @State private var date = Date.now
+    
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Spent $0.00 on ...")
-            Spacer()
-            ForEach(categories, id:\.self) { category in
-                HStack {
-                    Text(category)
-                    Spacer()
-                    Text("$0.00")
-                }
-            }
-            .padding(8)
-            Spacer()
-            Button("Submit", systemImage: "checkmark") {
-                // save entry
-                print("submitted")
-                dismiss()
-            }
-            .labelStyle(.iconOnly)
+        Button("Category") {
+            dismiss()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

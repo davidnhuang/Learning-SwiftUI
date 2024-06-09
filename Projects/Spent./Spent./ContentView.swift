@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct ExpenseItem: Identifiable, Codable {
-    let id = UUID()
-    let label: String
+    var id = UUID()
     let category: String
     let amount: Double
-    let date: String
+    let date: Date
 }
 
 @Observable
@@ -32,33 +31,15 @@ class Expenses {
                 return
             }
         }
+        
+        // If all fails, array is empty
+        items = []
     }
 }
 
 struct ContentView: View {
-    @State private var showCategoryPicker = false
-    @State private var showSpentAlert = false
-    @State private var enteredAmount = 0.0
-    
-    @State private var expenses = Expenses()
-    @State private var showingAddExpense = false
-    
-    // todo: don't use navigation stack, use presentation modal
     var body: some View {
-        VStack {
-            Spacer()
-            Text("$0.00")
-                .font(.title)
-            Spacer()
-            Button("Next", systemImage: "arrow.right") {
-                showCategoryPicker = true
-            }
-            .fullScreenCover(isPresented: $showCategoryPicker, content: {
-                CategoryPicker()
-            })
-            .labelStyle(.iconOnly)
-        }
-        .padding()
+        InputView()
     }
 }
 
