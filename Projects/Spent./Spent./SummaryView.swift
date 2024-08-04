@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SummaryView: View {
+    @State private var expenses = Expenses()
+    
     var body: some View {
         Text("Summary View")
     }

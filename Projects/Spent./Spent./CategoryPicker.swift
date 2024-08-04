@@ -13,6 +13,7 @@ struct CategoryPicker: View {
     let categories = ["Dining", "Beverages", "Entertainment", "Medical", "Emergency", "Other"]
     
     @State private var date = Date.now
+    
     var inputAmount: String
     
     var body: some View {
@@ -21,6 +22,7 @@ struct CategoryPicker: View {
         Text(inputAmount)
         
         Button("Save") {
+            let item = ExpenseItem(category: "Other", amount: 0.0, date: date)
             dismiss()
         }
     }
